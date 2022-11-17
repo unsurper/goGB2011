@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/shootingfans/codec_gb26875_3_2011/constant"
+	"github.com/unsurper/goGB2011/constant"
 )
 
 // ReaderDecoder is a decoder for io.Reader

@@ -12,8 +12,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/shootingfans/codec_gb26875_3_2011/codec"
-	"github.com/shootingfans/codec_gb26875_3_2011/utils"
+	"github.com/unsurper/goGB2011/codec"
+	"github.com/unsurper/goGB2011/utils"
 )
 
 var serverAddr = flag.String("server-host", "127.0.0.1:8181", "server address")

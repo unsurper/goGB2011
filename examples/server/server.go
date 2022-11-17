@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/shootingfans/codec_gb26875_3_2011/codec"
-	"github.com/shootingfans/codec_gb26875_3_2011/constant"
+	"github.com/unsurper/goGB2011/codec"
+	"github.com/unsurper/goGB2011/constant"
 )
 
 var listenOn = flag.String("listen", "127.0.0.1:8181", "listen address")

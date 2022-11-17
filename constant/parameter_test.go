@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/shootingfans/codec_gb26875_3_2011/constant"
+	"github.com/unsurper/goGB2011/constant"
 
 	"github.com/stretchr/testify/assert"
 )
