@@ -2,19 +2,18 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"github.com/unsurper/goGB2011/codec"
+	"github.com/unsurper/goGB2011/constant"
 	"log"
 	"net"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
-	"time"
-
-	"github.com/unsurper/goGB2011/codec"
-	"github.com/unsurper/goGB2011/constant"
 )
 
-var listenOn = flag.String("listen", "127.0.0.1:8181", "listen address")
+var listenOn = flag.String("listen", "0.0.0.0:7922", "listen address")
 
 func main() {
 	flag.Parse()
@@ -60,10 +59,8 @@ func processConnection(storage *sync.Map, conn net.Conn, wg *sync.WaitGroup) {
 			if !ok {
 				return
 			}
-			log.Printf("receive packet is empty?: %v\n", p.IsEmpty())
-			log.Printf("upload transmission timestamp count is %d", len(p.TransmissionTimestamps))
-			log.Printf("and timestamp is %s\n", time.Unix(p.TransmissionTimestamps[0].Timestamp, 0))
-			by, _ := codec.Encode(&constant.Packet{
+			log.Printf("Receive Data HEX:%x", p.AppData)
+			by, err := codec.Encode(&constant.Packet{
 				Header: constant.Header{
 					SerialId:  p.Header.SerialId,
 					Version:   p.Header.Version,
@@ -73,6 +70,10 @@ func processConnection(storage *sync.Map, conn net.Conn, wg *sync.WaitGroup) {
 				},
 				Action: constant.AckAction,
 			})
+			log.Printf("Send Data HEX:%x", by)
+			if err != nil {
+				fmt.Println(err)
+			}
 			conn.Write(by)
 		}
 	}

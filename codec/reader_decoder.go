@@ -3,6 +3,7 @@ package codec
 import (
 	"bufio"
 	"errors"
+	log "github.com/sirupsen/logrus"
 	"io"
 	"runtime"
 	"sync/atomic"
@@ -52,6 +53,7 @@ func (r *readerDecoder) cron() {
 			}
 			r.reader.Discard(n)
 			readlen = DefaultTailLength + DefaultHeadLength
+			log.Infof("Receive Data HEX:%x\n", b)
 			select {
 			case <-r.close:
 				return

@@ -16,7 +16,7 @@ import (
 	"github.com/unsurper/goGB2011/utils"
 )
 
-var serverAddr = flag.String("server-host", "127.0.0.1:8181", "server address")
+var serverAddr = flag.String("server-host", "127.0.0.1:7092", "server address")
 var serialNumber uint16 = 0
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 	sg := make(chan os.Signal)
 	signal.Notify(sg, syscall.SIGINT, syscall.SIGALRM)
 	defer conn.Close()
-	ticker := time.NewTicker(time.Second * 1)
+	ticker := time.NewTicker(time.Millisecond * 1000)
 	buf := bytes.NewBuffer(make([]byte, 100))
 	cd := codec.NewReaderDecoder(conn)
 	defer cd.Close()
