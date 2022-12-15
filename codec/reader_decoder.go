@@ -40,6 +40,12 @@ func (r *readerDecoder) cron() {
 			return
 		}
 		b, gerr := r.reader.Peek(readlen)
+		if gerr != nil {
+			if gerr != io.EOF {
+				log.Error("readerDecoder ERR:", gerr)
+				return
+			}
+		}
 		if len(b) > 0 {
 			p, n, err := Decode(b)
 			if err != nil {
